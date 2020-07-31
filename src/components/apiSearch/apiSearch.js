@@ -8,7 +8,7 @@ class ApiSearch extends React.Component{
         this.state={
             searchKey : '',
             items:[],
-            isLoading: false,
+            //isLoading: false,
             searchInput: '',
         }
         this.getDataBook=this.getDataBook.bind(this);
