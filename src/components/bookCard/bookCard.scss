@@ -1,0 +1,60 @@
+.book-column{
+    position:relative;width:100%;padding-right:15px;padding-left:15px;
+    .book-card{background:#fff;padding:15px;
+        @include border(1px solid #e1e5f1)
+        ;text-align:center;border-top:3px solid #3ecfac;margin-bottom:1em;
+    
+.book-card-image {
+    height: 13em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img{width:auto;
+        @include border-radius(5px)
+        ;vertical-align:middle;border-style:none}
+}
+    }
+
+    @include mobile{
+        -ms-flex:0 0 100%;flex:0 0 100%;max-width:100%
+        }
+        @include tablet{
+           -ms-flex:0 0 50%;flex:0 0 50%;max-width:50%
+         }
+         @include laptop{
+            -ms-flex:0 0 33.3%;flex:0 0 33.3%;max-width:33.3%
+             }
+         @include desktop{
+           -ms-flex:0 0 25%;flex:0 0 25%;max-width:25%
+         }
+
+}
+
+.book-card-body{
+    .book-header{
+        .book-.author{color:#138da0}
+    }
+    .book-details {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+        .book-id-number{margin:12px 0;color:#848484}
+    }
+    .book-details-footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+        .book-badge{padding:.25em .5em;font-size:80%;line-height:1;border-radius:.35rem;   flex-basis: calc(49% - 10px);
+            flex-grow: 1;
+            margin-left: 5px;}
+.book-badge-blue{color:#fff;background-color:#17a2b8}
+.book-badge-green{color:#fff;background-color:#28a745}
+    }
+
+}
+
+
+.book-hight-text{min-height:2.4em;margin:8px 0}
