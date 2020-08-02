@@ -1,5 +1,6 @@
 import React from "react";
 import BookList from "../BookList/bookList";
+import NotFound from "../NotFound/notFound";
 //import SearchBox from "../SearchBox/searchBox"
 
 class ApiSearch extends React.Component {
@@ -8,20 +9,26 @@ class ApiSearch extends React.Component {
     this.state = {
       searchKey: "",
       items: [],
-      //isLoading: false,
+      isLoading: false,
       searchInput: "",
+      isFind:'hide',
+      totalItem:1
+   
     };
-    this.getDataBook = this.getDataBook.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
+  
+     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
-  handleKeyPress(event) {
-    if (event.key === "Enter") this.getDataBook();
+  handleKeyPress = (e) =>{
+    this.setState({
+      searchKey: e.target.value.replace(/ +/g, ""),
+     });
+  
+    if (e.key === 'Enter'){
+      this.searchBook();
+    }
+ 
   }
-
-  handleSearch = (e) => {
-    this.setState({ searchKey: e.currentTarget.value });
-  };
 
   async getDataBook() {
     let searchKey = this.state.searchKey;
@@ -32,45 +39,64 @@ class ApiSearch extends React.Component {
       throw new Error("Could load json.");
     }
     const data = await response.json();
-    return data;
+
+    if(data.totalItems > 0){
+      return data;
+    }
   }
 
+
   searchBook = async () => {
-    if (this.state.searchKey.trim() !== "") {
+    if (this.state.searchKey !== '' ){
+      this.setState({
+        isLoading:true,
+        
+      });
+
       await this.getDataBook()
         .then((data) => {
-          let { items } = data;
-          this.setState({
-            items: items,
-          });
-          //console.log(data);
+          let { items,totalItems } = data;
+                   this.setState({
+                     items: items,
+                     isFind:'find',
+                     isLoading:false,
+                     totalItem:totalItems
+                   });
+               
+        
+        
         })
         .catch((error) => {
           console.log("Error in response data");
           console.log(error);
+          this.setState({
+            items: [],
+            isLoading:false,
+            totalItem:this.state.totalItems
+          });
         });
+    }else{
+      alert('please fill search box')
     }
   };
-  // handleChange(e){
-  //   this.setState({
-  //     searchKey: e.target.value
-  //   })
-  // }
+
 
   render() {
+    const {isFind,isLoading,totalItem} = this.state
     return (
-      <div>
-        <div className="search-wrap">
+      <div className="container">
+          <div className="row">
+        <div className={`search-wrap ${isFind}`}>
         <div className="search-input-field">
 
-<button className="btn-search" type="button" onClick={this.searchBook} disabled={this.state.isLoading} >
+<button className="btn-search" type="button"  onClick={this.searchBook} disabled={this.state.isLoading} >
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
   </svg>
 </button>
 
 <input
-  onChange={this.handleSearch}
+onKeyDown={this.handleKeyPress}
   id="searchInput"
   type="text"
   placeholder="search book..."
@@ -80,8 +106,14 @@ class ApiSearch extends React.Component {
 </div>
 
         </div>
-      
-        <BookList className="container" itemsListProp={this.state.items} />
+    <div className={`${(isLoading) ? 'show' :''}`} id="spinner"></div>
+ 
+ 
+   {totalItem > 0 ?   <BookList itemsListProp={this.state.items}  /> :<NotFound/>}
+ 
+      {/* <BookList itemsListProp={this.state.items}  /> */}
+    
+      </div>
       </div>
     );
   }

@@ -3,6 +3,8 @@ import React from "react";
 const BookCard = (props) => {
    console.log(typeof(props.imageLinks))
     return (
+      
+      
                             <div  className="book-column">
                       <div className="book-card">
                         <div className="book-list-content">
@@ -11,7 +13,7 @@ const BookCard = (props) => {
                                 <div className="book-header">
                                     <h4 className="book-title book-hight-text">Title: {props.title}</h4>
                                     <h4 className="book-author book-hight-text">Author: {props.author != null ? props.author:"no-authors"}</h4>
-                                    <h4 className="book-el-link book-hight-text">{props.title}</h4>
+                                    {/* <h4 className="book-el-link book-hight-text">{props.title}</h4> */}
                                 </div>
                                 <div className="book-details">
                                     <h5 className="book-publisher book-hight-text">Publisher: {props.publisher != null ? props.publisher : "No Publisher"}</h5>
@@ -28,6 +30,8 @@ const BookCard = (props) => {
                         </div>
                     </div>
                 </div>
+              
+               
     )
 }
 

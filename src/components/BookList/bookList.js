@@ -4,12 +4,10 @@ import BookCard from "../BookCard/bookCard";
 const BookList = (props) => {
  
   return (
-      <div className="container">
-
-    
-    <div className="row">
+   <>
+  
       {props.itemsListProp.map((item, i) => {
-         
+         //console.log(props.itemsListProp)
         let {
           title,
           imageLinks,
@@ -33,8 +31,8 @@ const BookList = (props) => {
           />
         );
       })}
-    </div>
-    </div>
+  
+    </>
   );
 };
 

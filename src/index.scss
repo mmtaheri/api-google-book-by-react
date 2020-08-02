@@ -5,7 +5,8 @@
 body{display:flex;min-height:100vh;flex-direction:column;margin:0}
 .wrap{display:flex;flex:1;flex-direction:column;padding:1em}
 .article-box{flex:1}
-.container{width:100%;margin:auto;
+.container{width:100%;margin:auto;top: 7em;    margin-bottom: 8em;
+    position: relative;
    @include mobile{
    max-width:540px;
    }
@@ -16,7 +17,7 @@ body{display:flex;min-height:100vh;flex-direction:column;margin:0}
         max-width:960px;
         }
     @include desktop{
-            max-width:1180px;
+            max-width:1190px;
     }
 }
 
@@ -25,8 +26,18 @@ body{display:flex;min-height:100vh;flex-direction:column;margin:0}
 [type="button"],[type="submit"]{-webkit-appearance:button}
 :focus{outline:none}
 svg:not(:root){overflow:hidden}
-.header,.footer{background:#9acd32;height:7em;padding:1em}
-.row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin: 2em 0;}
+.header,.footer{background:#9acd32;height:4em;padding:1em;    position: fixed;
+    width: 100%;    z-index: 99;}
+    .header{    top: 0;}
+    .footer{bottom: 0;}
+.row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin: 2em 0;
+    .book-not-found {
+        font-size: 2em;
+        text-align: center;
+        margin: 0 auto;
+        color: #e60000;
+    }
+}
 
 .wrap{
     @include mobile{
@@ -46,7 +57,7 @@ svg:not(:root){overflow:hidden}
     flex-direction: column;
     align-items: center;
 
-    img{width:auto;
+    img{width:140px;height: 11em;
         @include border-radius(5px)
         ;vertical-align:middle;border-style:none}
 }
@@ -69,7 +80,11 @@ svg:not(:root){overflow:hidden}
 
 .book-card-body{
     .book-header{
+      
+            color: #636363;
+      
         .book-.author{color:#138da0}
+        
     }
     .book-details {
         display: flex;
@@ -83,9 +98,9 @@ svg:not(:root){overflow:hidden}
         flex-wrap: wrap;
         justify-content: center;
         flex-direction: row;
-        .book-badge{padding:.25em .5em;font-size:80%;line-height:1;border-radius:.35rem;   flex-basis: calc(49% - 10px);
+        .book-badge{padding:.4em .5em;font-size:80%;line-height:1;border-radius:.35rem;   flex-basis: calc(49% - 10px);
             flex-grow: 1;
-            margin-left: 5px;}
+            margin-left: 5px;    margin-bottom: 5px;}
 .book-badge-blue{color:#fff;background-color:#17a2b8}
 .book-badge-green{color:#fff;background-color:#28a745}
     }
@@ -93,24 +108,35 @@ svg:not(:root){overflow:hidden}
 }
 
 
-.book-hight-text{min-height:2.4em;margin:8px 0}
+.book-hight-text{height:2.4em;margin:8px 0;overflow: hidden;}
 
 
 .search-wrap {
-    background-color: #d5deff;    padding: 2em 0;
+      padding: 2em 0;    width: 100%;   
 }
+.search-wrap.hide{ height: 71vh;    align-items: center;
+    display: flex;
+    flex-direction: column;}
+.search-wrap.find{    position: fixed;
+    z-index: 99;
+    right: 0;
+    top: 0em;
+   }
 .search-input-field{width:50%;position:relative;display:flex;margin:auto;
-    .btn-search{width:70px;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;position:absolute;left:0;height:100%;background:#eee;border:0;padding:0;cursor:pointer;display:flex;-ms-flex-pack:center;justify-content:center;align-items:center;border-top-left-radius:34px;border-bottom-left-radius:34px;
+    @include mobile{
+        width:90%;    top: 1em;
+        }
+    .btn-search{width:70px;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;position:absolute;left:0;height:100%;background:#eee;padding:0;cursor:pointer;display:flex;-ms-flex-pack:center;justify-content:center;align-items:center;border-top-left-radius:34px;border-bottom-left-radius:34px;border: 1px solid #b9b9b9;
         svg{fill:#aaa;width:30px;height:30px;transition:all .2s ease-out,color .2s ease-out}
     }
-    input{height:100%;width:100%;background:transparent;
-        @include border(0);
+    input{height:100%;width:100%;background:transparent;border: 1px solid #b9b9b9;
+    
         background:#fff;display:block;width:100%;padding:10px 32px 10px 80px;font-size:18px;color:#666;border-radius:34px}
 }
 
 
 
-#spinner{visibility:hidden;width:80px;height:80px;display: none;
+#spinner{visibility:hidden;width:80px;height:80px;display: none;    z-index: 999;
     @include border(1px solid #f3f3f3);
     border-top:3px solid #f25a41;
     @include border-radius(100%)
